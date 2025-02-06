@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -41,3 +41,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Better Layer
+    uniqueID: 3147416509
+    locked: 0
+  - name: P-Layer
+    uniqueID: 950262711
+    locked: 0
+  m_RenderingLayers:
+  - Default

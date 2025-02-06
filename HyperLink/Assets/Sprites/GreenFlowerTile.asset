@@ -21,8 +21,8 @@ MonoBehaviour:
     - {fileID: 86298917, guid: 43d61e2dd5c214347a6afcf71f6df3cf, type: 3}
     - {fileID: 1712598865, guid: 43d61e2dd5c214347a6afcf71f6df3cf, type: 3}
     m_GameObject: {fileID: 0}
-    m_MinAnimationSpeed: 1
-    m_MaxAnimationSpeed: 1
+    m_MinAnimationSpeed: 2
+    m_MaxAnimationSpeed: 5
     m_PerlinScale: 0.5
     m_Output: 2
     m_ColliderType: 1
