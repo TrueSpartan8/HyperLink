@@ -15,6 +15,7 @@ public class ButtonPress : MonoBehaviour
         if(collider.gameObject.tag == "block" || collider.gameObject.tag == "Player")
         {
             animator.SetBool("isButtonPressed", true);
+            BroadcastMessage("openDoor");
         }
     }
 
@@ -23,6 +24,7 @@ public class ButtonPress : MonoBehaviour
         if (collider.gameObject.CompareTag("block") || collider.gameObject.CompareTag("Player"))
         {
             animator.SetBool("isButtonPressed", false);
+            BroadcastMessage("closeDoor");
         }
     }
 }
