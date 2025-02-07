@@ -18,13 +18,13 @@ public class doorScript : MonoBehaviour
 
     void openDoor()
     {
-        gameObject.GetComponent<Box Collider 2D>().enabled = false;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
         animator.SetBool("isOpen", true);
     }
 
     void closeDoor()
     {
-        gameObject.GetComponent<Box Collider 2D>().enabled = true;
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
         animator.SetBool("isOpen", false);
 
     }
