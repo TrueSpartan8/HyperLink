@@ -21,10 +21,12 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        BroadcastMessage("Swing");
+        if (context.performed)
+        {
+            BroadcastMessage("Swing");
 
-        animator.SetFloat("LastInputX", mousePos.x - transform.position.x);
-        animator.SetFloat("LastInputY", mousePos.y - transform.position.y);
-
+            animator.SetFloat("LastInputX", mousePos.x - transform.position.x);
+            animator.SetFloat("LastInputY", mousePos.y - transform.position.y);
+        }
     }
 }
