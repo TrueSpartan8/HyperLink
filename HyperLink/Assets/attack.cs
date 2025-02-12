@@ -19,7 +19,6 @@ public class attack : MonoBehaviour
     public void Swing()
     {
         animator.SetTrigger("attack");
-        //animator.ResetTrigger("attack");
     }
 
 }
