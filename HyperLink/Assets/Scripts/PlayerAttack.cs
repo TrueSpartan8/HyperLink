@@ -20,24 +20,24 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mousePos = Input.mousePosition;
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        
     }
 
     public void Attack(InputAction.CallbackContext context) //Attack() from the Input Actions controller
     {
         if (context.performed)
         {
-            
+            //change the direction of the player to face the clicked mouse pointer
+            mousePos = Input.mousePosition;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            animator.SetFloat("LastInputX", mousePos.x - transform.position.x);
+            animator.SetFloat("LastInputY", mousePos.y - transform.position.y);
+
             if (isNextAttackDisabled) {return;} //cancel the Attack() if its disabled
             isAttacking = true; //the player is right now currently in the process of attacking
             isNextAttackDisabled = true;
             BroadcastMessage("Attack"); //call the Attack() method in any child objects (which in turn triggers attack in the animator)
             StartCoroutine(DelayAttack());
-
-            //change the direction of the player to face the clicked mouse pointer
-            animator.SetFloat("LastInputX", mousePos.x - transform.position.x);
-            animator.SetFloat("LastInputY", mousePos.y - transform.position.y);
         }
     }
 
