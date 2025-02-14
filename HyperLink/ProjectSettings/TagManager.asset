@@ -6,6 +6,7 @@ TagManager:
   tags:
   - block
   - '"block"'
+  - Current Weapon
   layers:
   - Default
   - TransparentFX
