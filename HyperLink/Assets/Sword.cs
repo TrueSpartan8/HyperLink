@@ -5,6 +5,7 @@ public class Weapon : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private Animator animator;
     private PlayerAttack playerAttack;
+    private playerMovement playerMovement;
     SpriteRenderer rend;
     public float damage = 2f;    
     public float attackDelay = 0.25f;
@@ -13,6 +14,7 @@ public class Weapon : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<playerMovement>();
         rend = GetComponent<SpriteRenderer>();
     }
 
@@ -40,9 +42,11 @@ public class Weapon : MonoBehaviour
     public void Attack()
     {
         animator.SetTrigger("attack"); //trigger the attack animation
+        playerMovement.SetCanMove(false);
     }
 
     public void OnAttackAnimationEnd() { //this is called when the slash animation ends (animator event)
         playerAttack.SetIsAttacking(false);
+        playerMovement.SetCanMove(true);
     }
 }
