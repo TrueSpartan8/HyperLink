@@ -3,19 +3,30 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.UIElements;
 
 public class playerMovement : MonoBehaviour
 {
     public float moveSpeed = 2f;
     private float originalMoveSpeed = 0f;
+    private Vector2 newMovement;
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private Animator animator;
+
+    private enum playerDirectionEnum {
+        up,
+        down,
+        left,
+        right
+    };
+    private playerDirectionEnum direction = playerDirectionEnum.down;
     private bool canMove = true;
+    private bool isMoving;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
+    {   
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         originalMoveSpeed = moveSpeed;
@@ -24,13 +35,23 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.linearVelocity = moveInput * moveSpeed;
-
-        if (!canMove) {
-            moveSpeed = 0;
+        if (canMove) { //player is able to move
+            newMovement = moveInput * moveSpeed;
+            if (newMovement != Vector2.zero) { //the player has moved
+                isMoving = true;
+                if (newMovement.y > rb.linearVelocity.y) {direction = playerDirectionEnum.up;}
+                else if (newMovement.y < rb.linearVelocity.y) {direction = playerDirectionEnum.down;}
+                if (newMovement.x < rb.linearVelocity.x) {direction = playerDirectionEnum.left;}
+                else if (newMovement.x > rb.linearVelocity.x) {direction = playerDirectionEnum.right;}
+            }
+            else { //the player did not move
+                isMoving = false;
+            }
+            rb.linearVelocity = newMovement;
         }
-        else {
-            moveSpeed = originalMoveSpeed;
+        else { //player is unable to move, and will not move
+            isMoving = false;
+            rb.linearVelocity = Vector2.zero;
         }
     }
 

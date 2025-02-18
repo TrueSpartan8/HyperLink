@@ -26,6 +26,7 @@ public class Weapon : MonoBehaviour
         }
         //only rotate the sword to face the mouse IF the player is not currently attacking or is in the middle of an attack animation
         if (!playerAttack.GetIsAttacking()) {
+            /*
             Vector3 mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
             Vector2 direction = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
@@ -35,7 +36,7 @@ public class Weapon : MonoBehaviour
             else {
                 rend.sortingOrder = 3;
             }
-            transform.up = direction;
+            transform.up = direction; */
         }
     }
 
