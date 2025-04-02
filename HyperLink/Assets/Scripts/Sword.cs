@@ -40,7 +40,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void Attack()
+    public void swordAttack()
     {
         animator.SetTrigger("attack"); //trigger the attack animation
         playerMovement.SetCanMove(false);

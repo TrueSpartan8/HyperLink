@@ -10,11 +10,14 @@ public class PlayerAttack : MonoBehaviour
     public float attackDelay = 0.25f; //this attack delay will be replaced by the attackDelay of the current weapon
     private bool isNextAttackDisabled; //if attackDelay has ended, then you can perform another (next) attack
     private bool isAttacking; //if the attack animation is in progress, the player isAttacking
+    public GameObject swing;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         animator = GetComponent<Animator>();
+        swing = GameObject.FindWithTag("slash");
+        swing.GetComponent<EdgeCollider2D>().enabled = false;
     }
 
     // Update is called once per frame
@@ -33,11 +36,15 @@ public class PlayerAttack : MonoBehaviour
             animator.SetFloat("LastInputX", mousePos.x - transform.position.x);
             animator.SetFloat("LastInputY", mousePos.y - transform.position.y);
 
+            swing.GetComponent<EdgeCollider2D>().enabled = true;
+            Invoke("disableSwordHitbox", 1);
+
             if (isNextAttackDisabled) {return;} //cancel the Attack() if its disabled
             isAttacking = true; //the player is right now currently in the process of attacking
             isNextAttackDisabled = true;
-            BroadcastMessage("Attack"); //call the Attack() method in any child objects (which in turn triggers attack in the animator)
+            BroadcastMessage("swordAttack"); //call the Attack() method in any child objects (which in turn triggers attack in the animator)
             StartCoroutine(DelayAttack());
+            
         }
     }
 
@@ -51,4 +58,5 @@ public class PlayerAttack : MonoBehaviour
     //getter and setter for the isAttacking boolean
     public void SetIsAttacking(bool isAttacking) {this.isAttacking = isAttacking;}
     public bool GetIsAttacking() {return this.isAttacking;}
+    public void disableSwordHitbox() {swing.GetComponent<EdgeCollider2D>().enabled = false;}
 }
