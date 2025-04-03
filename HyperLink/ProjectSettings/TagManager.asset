@@ -12,11 +12,12 @@ TagManager:
   - greenBlock
   - blueBlock
   - enemy
+  - enemyAttack
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Attack
   - Water
   - UI
   - 
@@ -60,6 +61,9 @@ TagManager:
     locked: 0
   - name: TallObjects
     uniqueID: 2315572385
+    locked: 0
+  - name: Attack
+    uniqueID: 2566735117
     locked: 0
   m_RenderingLayers:
   - Default

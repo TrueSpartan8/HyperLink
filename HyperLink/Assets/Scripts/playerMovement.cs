@@ -22,7 +22,7 @@ public class playerMovement : MonoBehaviour
     };
     private playerDirectionEnum direction = playerDirectionEnum.down;
     private bool canMove = true;
-    private bool isMoving;
+    private bool isKnockedBack = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,22 +35,21 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isKnockedBack)
+        {
+            return;
+        }
         if (canMove) { //player is able to move
             newMovement = moveInput * moveSpeed;
             if (newMovement != Vector2.zero) { //the player has moved
-                isMoving = true;
                 if (newMovement.y > rb.linearVelocity.y) {direction = playerDirectionEnum.up;}
                 else if (newMovement.y < rb.linearVelocity.y) {direction = playerDirectionEnum.down;}
                 if (newMovement.x < rb.linearVelocity.x) {direction = playerDirectionEnum.left;}
                 else if (newMovement.x > rb.linearVelocity.x) {direction = playerDirectionEnum.right;}
             }
-            else { //the player did not move
-                isMoving = false;
-            }
             rb.linearVelocity = newMovement;
         }
         else { //player is unable to move, and will not move
-            isMoving = false;
             rb.linearVelocity = Vector2.zero;
         }
     }
@@ -72,5 +71,18 @@ public class playerMovement : MonoBehaviour
 
     public void SetCanMove(bool canMove) {
         this.canMove = canMove;
+    }
+
+    public void knockback(Vector2 direction, float strength)
+    {
+        isKnockedBack = true;
+        rb.linearVelocity = (direction.normalized * strength);
+        Invoke("endKnockback", 0.1f);
+    }
+
+    private void endKnockback()
+    {
+        rb.linearVelocity = Vector2.zero;
+        isKnockedBack = false;
     }
 }

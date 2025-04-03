@@ -37,7 +37,7 @@ public class PlayerAttack : MonoBehaviour
             animator.SetFloat("LastInputY", mousePos.y - transform.position.y);
 
             swing.GetComponent<EdgeCollider2D>().enabled = true;
-            Invoke("disableSwordHitbox", 1);
+            Invoke("disableSwordHitbox", 0.2f);
 
             if (isNextAttackDisabled) {return;} //cancel the Attack() if its disabled
             isAttacking = true; //the player is right now currently in the process of attacking

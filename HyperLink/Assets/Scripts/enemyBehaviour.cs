@@ -16,7 +16,7 @@ public class enemyBehaviour : MonoBehaviour
     private Color ogColor;
     private bool isHit;
     private Vector2 knockbackDirection;
-    public float knockbackStrength = -10f;
+    public float knockbackStrength = -0.01f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -60,7 +60,7 @@ public class enemyBehaviour : MonoBehaviour
         transform.position = new Vector2(-10, -10);
     }
 
-    void OnTriggerExit2D(Collider2D collider)
+    void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.CompareTag("slash") && !isHit)
         {
@@ -69,14 +69,20 @@ public class enemyBehaviour : MonoBehaviour
             animator.SetBool("isMoving", false);
             m_SpriteRenderer.color = new Color(255, 0, 0);
             Debug.Log("Hit");
-            Invoke("resetColor",2);
             knockbackDirection = player.transform.position - GameObject.FindWithTag("slash").transform.position;
-            rb.AddForce(knockbackDirection.normalized * knockbackStrength);
+            rb.linearVelocity = (knockbackDirection.normalized * knockbackStrength);
+            Invoke("endKnockback", 0.1f);
+            Invoke("resetColor", 1);
         }
     }
 
+    private void endKnockback()
+    {
+        rb.linearVelocity = Vector2.zero;
+    }
     void resetColor()
     {
+        rb.linearVelocity = Vector2.zero;
         Debug.Log("Reset Color");
         isHit = false;
         m_SpriteRenderer.color = ogColor;
