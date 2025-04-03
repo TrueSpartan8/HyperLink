@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class healthBar : MonoBehaviour
 {
+    public float barX;
+    public float barY;
+    public float totalHealth;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,8 +19,8 @@ public class healthBar : MonoBehaviour
 
     public void updateHealth(float health)
     {
-        transform.localScale = new Vector2(health/100, 0.2f);
+        transform.localScale = new Vector2((health/100) * totalHealth, 0.2f);
         
-        transform.position = new Vector2((Camera.main.transform.position.x - 1.04f) + (-1+(health/100))/2, Camera.main.transform.position.y + 0.62f);
+        transform.position = new Vector2((Camera.main.transform.position.x + barX) + (-1+(health/100))*totalHealth/2, Camera.main.transform.position.y + barY);
     }
 }
