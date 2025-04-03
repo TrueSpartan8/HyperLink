@@ -17,6 +17,7 @@ public class enemyBehaviour : MonoBehaviour
     private bool isHit;
     private Vector2 knockbackDirection;
     public float knockbackStrength = -0.01f;
+    private PlayerHealth playerObj;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,6 +30,7 @@ public class enemyBehaviour : MonoBehaviour
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         ogColor = m_SpriteRenderer.color;
         isHit = false;
+        playerObj = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
@@ -64,11 +66,10 @@ public class enemyBehaviour : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("slash") && !isHit)
         {
-            health -= damage;
+            health -= playerObj.damage;
             isHit = true;
             animator.SetBool("isMoving", false);
             m_SpriteRenderer.color = new Color(255, 0, 0);
-            Debug.Log("Hit");
             knockbackDirection = player.transform.position - GameObject.FindWithTag("slash").transform.position;
             rb.linearVelocity = (knockbackDirection.normalized * knockbackStrength);
             Invoke("endKnockback", 0.1f);
@@ -83,7 +84,6 @@ public class enemyBehaviour : MonoBehaviour
     void resetColor()
     {
         rb.linearVelocity = Vector2.zero;
-        Debug.Log("Reset Color");
         isHit = false;
         m_SpriteRenderer.color = ogColor;
     }

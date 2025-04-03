@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     public float knockbackStrength = 0.01f;
     private Rigidbody2D rb;
     private playerMovement player;
+    private enemyBehaviour enemy;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,18 +43,18 @@ public class PlayerHealth : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("enemyAttack") && !isHit)
         {
-            health -= damage;
+            enemy = collider.gameObject.GetComponentInParent<enemyBehaviour>();
+            health -= enemy.damage;
             isHit = true;
             m_SpriteRenderer.color = new Color(255, 0, 0);
             Invoke("resetColor", 1);
-            knockbackDirection = GameObject.FindWithTag("enemyAttack").transform.position - transform.position;
+            knockbackDirection = collider.gameObject.transform.position - transform.position;
             player.knockback(knockbackDirection, knockbackStrength);
             
         }
     }
     void resetColor()
     {
-        Debug.Log("Reset Color");
         isHit = false;
         m_SpriteRenderer.color = ogColor;
     }
