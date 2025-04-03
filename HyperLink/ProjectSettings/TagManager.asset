@@ -9,6 +9,8 @@ TagManager:
   - Current Weapon
   - slash
   - redBlock
+  - greenBlock
+  - blueBlock
   layers:
   - Default
   - TransparentFX
