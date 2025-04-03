@@ -8,6 +8,7 @@ TagManager:
   - '"block"'
   - Current Weapon
   - slash
+  - redBlock
   layers:
   - Default
   - TransparentFX

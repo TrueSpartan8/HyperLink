@@ -6,6 +6,7 @@ public class ButtonPress : MonoBehaviour
 {
     private Animator animator;
     private Boolean isPressed = false; //the state of this button object
+    public string blockTag;
 
     void Start()
     {
@@ -19,7 +20,7 @@ public class ButtonPress : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collider)
     {
-        if(collider.gameObject.tag == "block" || collider.gameObject.tag == "Player")
+        if(collider.gameObject.tag == blockTag || collider.gameObject.tag == "Player")
         {
             isPressed = true;
             animator.SetBool("isButtonPressed", true);
@@ -29,7 +30,7 @@ public class ButtonPress : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("block") || collider.gameObject.CompareTag("Player"))
+        if (collider.gameObject.CompareTag(blockTag) || collider.gameObject.CompareTag("Player"))
         {
             isPressed = false;
             animator.SetBool("isButtonPressed", false);

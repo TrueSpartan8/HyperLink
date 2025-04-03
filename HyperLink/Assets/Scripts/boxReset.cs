@@ -4,11 +4,14 @@ public class boxReset : MonoBehaviour
 {
 
     private GameObject box;
+    public string blockTag;
+    public float originalX;
+    public float originalY;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        box = GameObject.FindWithTag("block");
+        box = GameObject.FindWithTag(blockTag);
     }
 
     // Update is called once per frame
@@ -19,6 +22,6 @@ public class boxReset : MonoBehaviour
 
     void Reset()
     {
-        box.transform.position = new Vector2(-6.16f, -0.56f);
+        box.transform.position = new Vector2(originalX, originalY);
     }
 }
