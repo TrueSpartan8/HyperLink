@@ -5,6 +5,7 @@ public class BossHealth : MonoBehaviour
     public int health;
     public GameObject bar;
     public GameObject overlay;
+    public GameObject creditButton;
     public healthBar other;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -12,6 +13,8 @@ public class BossHealth : MonoBehaviour
         health = GetComponent<enemyBehaviour>().health;
         bar = GameObject.Find("BossHealth");
         overlay = GameObject.Find("BossOverlay");
+        creditButton = GameObject.Find("Credit Button");
+        creditButton.SetActive(false);
         other = (healthBar) bar.GetComponent(typeof(healthBar));
     }
 
@@ -23,6 +26,7 @@ public class BossHealth : MonoBehaviour
 
         if (health <= 0)
         {
+            creditButton.SetActive(true);
             bar.transform.position = new Vector2(-10, -10);
             overlay.transform.position = new Vector2(-10, -10);
         }
